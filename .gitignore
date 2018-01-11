@@ -8,3 +8,6 @@
 /*.bexch
 /*.db*
 /b__*
+/default-loc.xml
+/gpsauto.cgpr
+/.#gestion_pile.adb#

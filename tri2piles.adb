@@ -14,7 +14,7 @@ begin
    Put(P1.Sommet.Value);
    Empiler(P1, 9);
    Put(P1.Sommet.Value);
---     Depiler(P1, Val);
---     Put(P1.Sommet.Value);
---     Put(Val);
+   Depiler(P1, Val);
+   Put(P1.Sommet.Value);
+   Put(Val);
 end tri2piles;

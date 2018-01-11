@@ -24,19 +24,20 @@ package body gestion_pile is
       if Vide(Pile) then
          Tmp := new T_Element'(Val, null);
       else
+         Pile.Sommet.Suivant := Pile.Sommet;
          Tmp := new T_Element'(Val, Pile.Sommet.Suivant);
       end if;
       Pile.Sommet := Tmp;
    end Empiler;
 
    procedure Depiler(Pile : in out T_Pile; Val : out Integer) is
-      TmpPile : T_Pile := Pile;
+
    begin
       if Vide(Pile) then
          raise Pile_Vide;
       else
          Val := Pile.Sommet.Value;
-         Pile.Sommet := TmpPile.Sommet.Suivant;
+         Pile.Sommet := Pile.Sommet.Suivant;
       end if;
    end Depiler;
 
