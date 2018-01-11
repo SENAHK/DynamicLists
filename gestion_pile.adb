@@ -3,43 +3,41 @@ with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 
 package body gestion_pile is
 
-   function Vide(Pile : T_Pile) return boolean is
-
+   function Empty(Stack : T_Stack) return boolean is
    begin
-      return Pile.Sommet = null;
-   end Vide;
+      return Stack.Peak = null;
+   end Empty;
 
+   function Peak(Stack: T_Stack) return Integer is
+      begin
+      if not Empty(Stack) then
+         return Stack.Peak.Value;
+      else
+         raise EMPTY_STACK;
+         end if;
+   end Peak;
 
---     function Sommet(Pile : T_Pile) return T_Info is
---
---     begin
---
---     end Sommet;
-
-
-
-   procedure Empiler(Pile : in out T_Pile; Val : in Integer) is
+   procedure Push(Stack : in out T_Stack; Val : in Integer) is
       Tmp: T_Ptr_Element;
    begin
-      if Vide(Pile) then
+      if Empty(Stack) then
          Tmp := new T_Element'(Val, null);
       else
-         Pile.Sommet.Suivant := Pile.Sommet;
-         Tmp := new T_Element'(Val, Pile.Sommet.Suivant);
+         Stack.Peak.Next := Stack.Peak;
+         Tmp := new T_Element'(Val, Stack.Peak.Next);
       end if;
-      Pile.Sommet := Tmp;
-   end Empiler;
+      Stack.Peak := Tmp;
+   end Push;
 
-   procedure Depiler(Pile : in out T_Pile; Val : out Integer) is
-
+   procedure Pop(Stack : in out T_Stack; Val : out Integer) is
    begin
-      if Vide(Pile) then
-         raise Pile_Vide;
+      if Empty(Stack) then
+         raise EMPTY_STACK;
       else
-         Val := Pile.Sommet.Value;
-         Pile.Sommet := Pile.Sommet.Suivant;
+         Val := Stack.Peak.Value;
+         Stack.Peak := Stack.Peak.Next;
       end if;
-   end Depiler;
+   end Pop;
 
 
 end gestion_pile;

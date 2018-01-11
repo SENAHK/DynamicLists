@@ -6,15 +6,15 @@ with Ada.Command_Line; use Ada.Command_Line;
 procedure tri2piles is
 
 
-   P1: T_Pile;
-   P2: T_Pile;
+   P1: T_Stack;
+   P2: T_Stack;
    Val : Integer;
 begin
-   Empiler(P1, 3);
-   Put(P1.Sommet.Value);
-   Empiler(P1, 9);
-   Put(P1.Sommet.Value);
-   Depiler(P1, Val);
-   Put(P1.Sommet.Value);
+   Push(P1, 3);
+   Put(Peak(P1));
+   Push(P1, 9);
+   Put(Peak(P1));
+   Pop(P1, Val);
+   Put(Peak(P1));
    Put(Val);
 end tri2piles;
