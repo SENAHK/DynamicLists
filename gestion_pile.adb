@@ -23,8 +23,7 @@ package body gestion_pile is
       if Empty(Stack) then
          Tmp := new T_Element'(Val, null);
       else
-         Stack.Peak.Next := Stack.Peak;
-         Tmp := new T_Element'(Val, Stack.Peak.Next);
+         Tmp := new T_Element'(Val, Stack.Peak);
       end if;
       Stack.Peak := Tmp;
    end Push;
