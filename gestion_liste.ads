@@ -12,22 +12,25 @@ package gestion_liste is
    type T_Element;
    type T_Ptr_Element is access T_Element;
    type T_Element is record
-      Value : T_Info;
+      Value : Integer;
       Next : T_Ptr_Element := null;
-      end record;
+   end record;
 
    type T_List is record
-      Current : T_Ptr_Element := null;
+      -- First element of the list
+      Head: T_Ptr_Element := null;
+      -- Current position in the list
+      Position : T_Ptr_Element := null;
    end record;
 
    -----------------------------------------------------------------------------
    -- PROCEDURES & FUNCTIONS
-
-   procedure Insert(List: in out T_List; Val: in String);
-   procedure Delete(List: in out T_List; Val: in String);
-   function Search(List: T_List; Val: String) return Natural;
-   function Intersect(Left, Right: T_List) return T_List;
-   function Difference(Left, Right: T_List) return T_List;
-   function "+"(Left, Right: T_List) return T_List;
-
+   procedure Put(List: in T_list);
+   procedure Insert(List: in out T_List; Val: in Integer);
+--     procedure Delete(List: in out T_List; Val: in String);
+--     function Search(List: T_List; Val: String) return Natural;
+--     function Intersect(Left, Right: T_List) return T_List;
+--     function Difference(Left, Right: T_List) return T_List;
+--     function "+"(Left, Right: T_List) return T_List;
+   function Empty(List: T_List) return Boolean;
 end gestion_liste;
