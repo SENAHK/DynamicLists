@@ -14,3 +14,9 @@
 .#*
 *.gpr
 *.xml
+*.txt
+*.ref
+check*
+makefile*
+*.ref*
+book1.txt

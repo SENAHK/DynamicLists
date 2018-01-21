@@ -1,1 +1,14 @@
 when zombies attack mathematical modelling of an outbreak of zombie infection
+
+zombies are a popular figure in pop culture entertainment and they are usually
+portrayed as being brought about through an outbreak or epidemic consequently
+we model a zombie attack using biological assumptions based on popular zombie
+movies we introduce a basic model for zombie infection determine equilibria and
+their stability and illustrate the outcome with numerical solutions we then refine the
+model to introduce a latent period of zombification whereby humans are infected but
+not infectious before becoming undead we then modify the model to include the
+effects of possible quarantine or a cure finally we examine the impact of regular
+impulsive reductions in the number of zombies and derive conditions under which
+eradication can occur we show that only quick aggressive attacks can stave off the
+doomsday scenario the collapse of society as zombies overtake us all
+
