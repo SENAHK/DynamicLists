@@ -12,3 +12,5 @@
 /gpsauto.cgpr
 /.#gestion_pile.adb#
 .#*
+*.gpr
+*.xml
