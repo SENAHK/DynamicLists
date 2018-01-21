@@ -65,7 +65,7 @@ end Put;
 
 
 
-   List: T_List;
+   L1, L2: T_List;
    Nb: T_Lisa;
 begin
 
@@ -83,16 +83,24 @@ begin
 --        Close(Fichier);
 
    --Insert(List, "il");
-   Insert(List, "il");
-   Insert(List, "fait");
-   Insert(List, "froid");
-   Insert(List, "ce");
-   Insert(List, "matin");
-   Insert(List, "ce");
-   Insert(List, "froid");
-   Insert(List, "donne");
-   Insert(List, "froid");
-   Insert(List, "a");
-   Put(List);
-   Put(Search(List, "matin"));
+   Insert(L1, "il");
+   Insert(L1, "fait");
+   Insert(L1, "froid");
+   Insert(L1, "ce");
+   Insert(L1, "matin");
+   Insert(L1, "ce");
+   Insert(L1, "froid");
+   Insert(L1, "donne");
+   Insert(L1, "froid");
+   --Put(List);
+   Insert(L2, "pierre");
+   Insert(L2, "froid");
+   Insert(L2, "froid");
+   Insert(L2, "pierre");
+   Insert(L2, "pierre");
+   Insert(L2, "ce");
+   --Put(L1);
+   --Put( Intersect(L1, L2) );
+   Put( Difference(L1, L2) );
+   --Put(Search(List, "matin"));
 end dico;

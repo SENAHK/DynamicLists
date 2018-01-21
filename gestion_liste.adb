@@ -74,21 +74,54 @@ package body gestion_liste is
          raise WORD_INEXISTANT;
       end if;
    end Search;
-   --
-   --     function Intersect(Left, Right: T_List) return T_List is
-   --     begin
-   --
-   --     end Intersect;
-   --
-   --     function Difference(Left, Right: T_List) return T_List is
-   --     begin
-   --
-   --     end Difference;
-   --
-   --     function "+"(Left, Right: T_List) return T_Listis
-   --     begin
-   --
-   --     end "+";
+
+   function Intersect(Left, Right: T_List) return T_List is
+      L1 : T_List := Left;
+      L2: T_List := Right;
+      Common: T_List;
+   begin
+      while L1 /= null loop
+         while L2 /= null loop
+            if L1.Value.Word = L2.Value.Word then
+               Insert(Common, L1.Value.Word);
+               exit;
+            end if;
+            L2 := L2.Next;
+         end loop;
+         L2 := Right;
+         L1 := L1.Next;
+      end loop;
+      return Common;
+   end Intersect;
+
+   function Difference(Left, Right: T_List) return T_List is
+      L1 : T_List := Right;
+      L2: T_List := Left;
+      Diff: T_List;
+      Exists: Boolean := false;
+   begin
+      while L1 /= null loop
+         while L2 /= null loop
+            if L1.Value.Word = L2.Value.Word then
+               Exists := true;
+               exit;
+            end if;
+            L2 := L2.Next;
+         end loop;
+         if not Exists then
+            Insert(Diff, L1.Value.Word);
+         end if;
+         Exists := false;
+         L2 := Left;
+         L1 := L1.Next;
+      end loop;
+      return Diff;
+   end Difference;
+      --
+      --     function "+"(Left, Right: T_List) return T_Listis
+      --     begin
+      --
+      --     end "+";
 
 
-end gestion_liste;
+   end gestion_liste;
