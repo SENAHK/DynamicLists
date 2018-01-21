@@ -82,7 +82,6 @@ begin
 --        end loop;
 --        Close(Fichier);
 
-   --Insert(List, "il");
    Insert(L1, "il");
    Insert(L1, "fait");
    Insert(L1, "froid");
@@ -99,8 +98,10 @@ begin
    Insert(L2, "pierre");
    Insert(L2, "pierre");
    Insert(L2, "ce");
+   Insert(L2, "jeanne");
    --Put(L1);
    --Put( Intersect(L1, L2) );
-   Put( Difference(L1, L2) );
+   --Put( Difference(L1, L2) );
+   Put( L1 + L2 );
    --Put(Search(List, "matin"));
 end dico;

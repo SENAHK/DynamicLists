@@ -28,6 +28,6 @@ package gestion_liste is
    function Search(List: T_List; Val: String) return Natural;
    function Intersect(Left, Right: T_List) return T_List;
    function Difference(Left, Right: T_List) return T_List;
---     function "+"(Left, Right: T_List) return T_List;
+   function "+"(Left, Right: T_List) return T_List;
    function Empty(List: T_List) return Boolean;
 end gestion_liste;

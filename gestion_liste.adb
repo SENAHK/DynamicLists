@@ -117,11 +117,19 @@ package body gestion_liste is
       end loop;
       return Diff;
    end Difference;
-      --
-      --     function "+"(Left, Right: T_List) return T_Listis
-      --     begin
-      --
-      --     end "+";
+
+   function "+"(Left, Right: T_List) return T_List is
+      L1 : T_List := Left;
+      L2: T_List := Right;
+   begin
+      While L2 /= null loop
+         for occurence in 1..L2.Value.Occurence loop
+            Insert(L1, L2.Value.Word);
+         end loop;
+         L2 := L2.Next;
+      end loop;
+      return L1;
+   end "+";
 
 
    end gestion_liste;
