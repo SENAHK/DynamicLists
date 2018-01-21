@@ -109,7 +109,9 @@ package body gestion_liste is
             L2 := L2.Next;
          end loop;
          if not Exists then
-            Insert(Diff, L1.Value.Word);
+            for occurence in 1..L1.Value.Occurence loop
+               Insert(Diff, L1.Value.Word);
+            end loop;
          end if;
          Exists := false;
          L2 := Left;

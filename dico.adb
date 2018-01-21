@@ -42,6 +42,7 @@ procedure dico is
 
 
    L1, L2: T_List;
+   Arg: String(1..2);
 begin
    begin
       if Argument_Count < 2 then
@@ -60,26 +61,29 @@ begin
 
          if Argument_Count = 3 then
             FileToList(Argument(2), L1);
+            Arg := Argument(1);
 
-            case Argument(1) is
-               when "-s" =>
-                  Put( Search(L1, Argument(3)) );
-               when "-x" =>
-                  Put( Delete(L1, Argument(3) ));
-               when "-i" =>
-                  FileToList(Argument(3), L2);
-                  Put( Intersect(L1, L2) );
-              when "-d" =>
-                  FileToList(Argument(3), L2);
-                  Put( Difference(L1, L2) );
-              when "-c" =>
-                  FileToList(Argument(3), L2);
-                  Put( L1 + L2 );
-
-               when others => raise INVALID_ARGUMENTS;
-            end case;
+            if Argument(1) = "-s" then
+               Put( Search(L1, Argument(3)) );
+            end if;
+            if Argument(1) = "-x" then
+               Put("OK");
+               --Put( Delete(L1, Argument(3) ));
+            end if;
+            if Argument(1) = "-i" then
+               FileToList(Argument(3), L2);
+               Put( Intersect(L1, L2) );
+            end if;
+            if Argument(1) = "-d" then
+               FileToList(Argument(3), L2);
+               Put( Difference(L2, L1) );
+            end if;
+            if Argument(1) = "-c" then
+               FileToList(Argument(3), L2);
+               Put( L1 + L2 );
+            end if;
          end if;
-
+      end if;
       exception
          when INVALID_ARGUMENTS => Put("Invalid Arguments");
          when WORD_INEXISTANT => Put("Word not found in the list");
