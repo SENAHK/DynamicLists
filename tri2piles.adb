@@ -1,3 +1,8 @@
+--AUTEUR:	Ramusi Michael
+--SECTION:	ITI 1re annee
+--DATE:		Janvier 2018
+--COURS:	Labo prog
+--PROJET:	Liste dynamiques
 with gestion_pile; use gestion_pile;
 with Text_IO; use Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
@@ -43,27 +48,47 @@ procedure tri2piles is
          end if;
 
       end loop;
+
+      while not Empty(Right) loop
+         Pop(Right, Popped);
+         Push(Left, Popped);
+      end loop;
    end FillStack;
 
+   -- I: Natural := 0;
    Left, Right: T_Stack;
    Val : Integer;
-   Values: T_Numbers(0..4) := (0 => 17,
-                               1 => 34,
-                               2 => 20,
-                               3 => 40,
-                               4 => 25  );
+
+   Values: T_Numbers(0..Argument_Count-1);
+   --     Values: T_Numbers(0..4) := (0 => 17,
+   --                                 1 => 34,
+   --                                 2 => 20,
+   --                                 3 => 40,
+   --                                 4 => 25  );
 begin
 
-   FillStack(Left, Right, Values);
-   New_Line;
-   Put("Sorted:");
-   loop
 
-      New_Line;
-      Put(Peak(LEfT));
-      Pop(Left, Val);
-      New_Line;
-      exit when Empty(Left);
-   end loop;
+   if Argument_Count > 0 then
 
+      for I in Values'Range loop
+         Values(I) := Integer'Value(Argument(I+1));
+         --I := I + 1;
+      end loop;
+
+
+      FillStack(Left, Right, Values);
+      New_Line;
+      Put("Sorted:");
+
+      loop
+
+         New_Line;
+         Put(Peak(LEfT));
+         Pop(Left, Val);
+         New_Line;
+         exit when Empty(Left);
+      end loop;
+   else
+      Put("Argument Error");
+   end if;
 end tri2piles;
