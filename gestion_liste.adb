@@ -1,3 +1,8 @@
+--AUTEUR:	Ramusi Michael
+--SECTION:	ITI 1re annee
+--DATE:		Janvier 2018
+--COURS:	Labo prog
+--PROJET:	Liste dynamiques
 with Text_IO; use Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 
@@ -8,6 +13,7 @@ package body gestion_liste is
       return List = null;
    end Empty;
 
+   -- Insert: push a word in a list of words
    procedure Insert(List: in out T_List; Val: in String) is
       Tmp : T_List := new T_Element'((Val'Length, Val, 1), null);
       Current : T_List := List;
@@ -62,6 +68,8 @@ package body gestion_liste is
    --
    --     end Delete;
    --
+
+   -- Search: find an element in the list and return nb of occurences
    function Search(List: T_List; Val: String) return Natural is
       Current: T_List := List;
    begin
@@ -75,6 +83,7 @@ package body gestion_liste is
       end if;
    end Search;
 
+   -- Intersect: return the words contained in list one and two
    function Intersect(Left, Right: T_List) return T_List is
       L1 : T_List := Left;
       L2: T_List := Right;
@@ -94,6 +103,8 @@ package body gestion_liste is
       return Common;
    end Intersect;
 
+   -- Difference: return the words contained in list one that list two
+   --             doesn't contain
    function Difference(Left, Right: T_List) return T_List is
       L1 : T_List := Right;
       L2: T_List := Left;
@@ -120,6 +131,7 @@ package body gestion_liste is
       return Diff;
    end Difference;
 
+   -- "+": concatenate the words and occurences of the two list
    function "+"(Left, Right: T_List) return T_List is
       L1 : T_List := Left;
       L2: T_List := Right;

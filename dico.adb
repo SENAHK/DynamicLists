@@ -1,3 +1,8 @@
+--AUTEUR:	Ramusi Michael
+--SECTION:	ITI 1re annee
+--DATE:		Janvier 2018
+--COURS:	Labo prog
+--PROJET:	Liste dynamiques
 with Text_IO; use Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Ada.Command_Line; use Ada.Command_Line;

@@ -1,3 +1,8 @@
+--AUTEUR:	Ramusi Michael
+--SECTION:	ITI 1re annee
+--DATE:		Janvier 2018
+--COURS:	Labo prog
+--PROJET:	Liste dynamiques
 package gestion_liste is
    -----------------------------------------------------------------------------
    -- DATA STRUCTURE
