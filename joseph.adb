@@ -1,78 +1,88 @@
-with Text_IO; use Text_IO;
+--AUTEUR:	Ramusi Michael
+--SECTION:	ITI 1re annee
+--DATE:		Janvier 2018
+--COURS:	Labo prog
+--PROJET:	Liste dynamiques
+with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Ada.Command_Line; use Ada.Command_Line;
+with Unchecked_Deallocation;
 
-procedure Joseph is
-   -----------------------------------------------------------------------------
-   -- DATA STRUCTURE
-
-   -- simple linked list
+procedure joseph is
+   -- Structure of list
    type T_Element;
-   type T_List is access T_Element;
+   type T_Liste is access T_Element;
    type T_Element is record
-      Value: Integer;
-      Next: T_List := null;
+      Value : Integer;
+      Next : T_Liste := null;
    end record;
+   
+   procedure Free is new Unchecked_Deallocation(T_Element, T_Liste);
 
-   -- circular list uses only one cursor
-   type T_Circular_List is record
-      Current: T_List := null;
-   end record;
-
-   type T_Numbers is array(Natural range <>) of Integer;
-   -----------------------------------------------------------------------------
-   -- PROCEDURES & FUNCTIONS
-
-   function Empty(List: T_Circular_List) return Boolean is
+   procedure Put(List : in T_Liste; N: in Integer) is
    begin
-      return List.Current = null;
-   end Empty;
-
-   procedure Push(List: in out T_Circular_List; Value: in Integer) is
-      Tmp: T_List;
-   begin
-      if Empty(List) then
-         Tmp := new T_Element'(Value, List.Current);
-         List.Current := Tmp;
-         List.Current.Next := List.Current;
-      else
-         Tmp := new T_Element'(Value, List.Current);
-         List.Current := Tmp;
+      if List.Value = N then
+         Put(List.Value);
+         Put(List.Next, N + 1);
       end if;
-   end Push;
-
-   Procedure Put(List: in T_Circular_List) is
-      Val: Integer;
-      Temp: T_Circular_List := List;
-   begin
-
-      for i in 0..6 loop
-         Val := Temp.Current.Value;
-         Temp.Current := Temp.Current.Next;
-         New_Line;
-         Put(Val);
-         New_Line;
-      end loop;
-
    end Put;
-   -----------------------------------------------------------------------------
-   -- VARIABLES
+	
+   -- Insert in List in a way for that List is a circular list-type
+   procedure Insert(List: in out T_Liste; N: in Integer) is 
+      Tmp: T_Liste := new T_Element;
+      Temp: T_Liste;
+   begin
+      List := new T_Element;
+      for i in 1..N loop
+         Tmp := new T_Element'(i, null);
+         List.Next := Tmp;
+         List := Tmp;
+         if i = 1 then
+            Temp := List;
+         end if;
+      end loop;
+      List.Next := Temp;
+   end Insert;
 
-   List: T_Circular_List;
-
-   Values: T_Numbers(0..4) := (0 => 17,
-                               1 => 34,
-                               2 => 20,
-                               3 => 40,
-                               4 => 25  );
+   -- Delete
+   procedure Delete(List : in out T_Liste; K : in Integer) is
+      Alias: T_Liste := List;
+      Tmp: T_Liste;
+      i: Integer := 0;
+   begin
+      while List /= null loop
+         i := i + 1;
+         -- for each k element, delete it
+         if i rem K = 0 then
+            List := List.Next;
+            Put(List.Value);
+            New_Line;
+            Tmp := List;
+            List := Alias.Next;
+            List.Next := Tmp.Next;
+            Free(Tmp);
+         else
+            Alias := List;
+            List:= List.Next;
+         end if;
+	      
+         if List = Alias then
+            Put(List.Value);
+            List := null;
+            exit;
+         end if;
+      end loop;
+   end Delete;
+   List : T_Liste;
+   -- N will fix the numbers that will be we in the list -> from 1 to N
+   N : Positive := Integer'Value(Argument(1));
+   -- K will fix the number of the step uses to delete an element in the list
+   K : Positive := Integer'Value(Argument(2));
 begin
-
-   for i in 0..4 loop
-      Push(List, Values(I));
-      Put(List.Current.Value);
-   end loop;
+   Put("OK");
    New_Line;
-   Put(List);
-
-
-end Joseph;
+   Insert(List, Integer'Value(Argument(1)));
+   New_Line;
+   Delete(List, Integer'Value(Argument(2)));
+   New_Line;   
+end joseph;
