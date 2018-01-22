@@ -48,7 +48,7 @@ procedure tri2piles is
          end if;
 
       end loop;
-
+      --Put( Right.Peak.Value);
       while not Empty(Right) loop
          Pop(Right, Popped);
          Push(Left, Popped);

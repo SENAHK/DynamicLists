@@ -29,7 +29,7 @@ package gestion_liste is
    -- PROCEDURES & FUNCTIONS
    procedure Put(List: in T_list);
    procedure Insert(List: in out T_List; Val: in String);
---     procedure Delete(List: in out T_List; Val: in String);
+   procedure Delete(List: in out T_List; Val: in String);
    function Search(List: T_List; Val: String) return Natural;
    function Intersect(Left, Right: T_List) return T_List;
    function Difference(Left, Right: T_List) return T_List;
