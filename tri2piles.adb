@@ -12,16 +12,16 @@ procedure tri2piles is
 
    type T_Numbers is array(Natural range <>) of Integer;
 
-   procedure FillStack(Left, Right: in out T_Stack; Values: in T_Numbers) is
+   procedure FillStack(Left, Right: in out T_Stack; Values: in out T_Numbers) is
       Nb, Popped: Integer;
       Cpt: Natural := 1;
    begin
-      -- Left stack should contain greater values
-      -- At first, push first val into it
-      Push(Left, Values(0));
+      -- Looping through the elements
+      for I in 0..Values'Last loop
+         Put("NB: ");
+         Put(Values(I));
+         new_line;
 
-      -- Looping through the remaining elements
-      for I in 1..Values'Last loop
          --Nb is the value to sort
          Nb := Values(I);
 
@@ -39,13 +39,7 @@ procedure tri2piles is
             Push(Left, Popped);
          end loop;
 
-         if not Empty(Right) and then Nb > Peak(Right) then
-            Push(Left, Nb);
-         end if;
-
-         if not Empty(Left) and then Nb > Peak(Left) then
-            Push(Left, Nb);
-         end if;
+         Push(Left, Nb);
 
       end loop;
       --Put( Right.Peak.Value);
@@ -60,31 +54,21 @@ procedure tri2piles is
    Val : Integer;
 
    Values: T_Numbers(0..Argument_Count-1);
-   --     Values: T_Numbers(0..4) := (0 => 17,
-   --                                 1 => 34,
-   --                                 2 => 20,
-   --                                 3 => 40,
-   --                                 4 => 25  );
 begin
-
-
    if Argument_Count > 0 then
 
       for I in Values'Range loop
          Values(I) := Integer'Value(Argument(I+1));
-         --I := I + 1;
       end loop;
-
 
       FillStack(Left, Right, Values);
       New_Line;
       Put("Sorted:");
 
       loop
-
          New_Line;
-         Put(Peak(LEfT));
          Pop(Left, Val);
+         Put(Val);
          New_Line;
          exit when Empty(Left);
       end loop;
