@@ -67,29 +67,8 @@ package body gestion_liste is
       end if;
    end Put;
 
-   procedure Delete(List: in out T_List; Val: in String) is
-      Current,Prec, Tmp : T_List := List;
-   begin
-      if Empty(List) then
-         raise EMPTY_LIST;
-      else
-         -- à compléter
-         --    boucle pour placer Prec < Val <= Current
-         while Prec.Value.Word < Val and then Val <= Current.Value.Word loop
-            Current := Current.Next;
-         end loop;
-         -- fin de liste ou Val absente de la liste
-         if Current = null or else Val < Current.Value.Word then
-            raise WORD_INEXISTANT;
-         else
-            if Val = Current.Value.Word then
-               Tmp := Current;
-               Tmp.Next := Tmp.Next.Next;
-               Free(Current);
-            end if;
-         end if;
-      end if;
-   end Delete;
+
+
 
 
    -- Search: find an element in the list and return nb of occurences
@@ -169,4 +148,29 @@ package body gestion_liste is
    end "+";
 
 
-   end gestion_liste;
+   procedure Delete(List: in out T_List; Val: in String) is
+      Current,Prec, Tmp : T_List := List;
+   begin
+      if Empty(List) then
+         raise EMPTY_LIST;
+      else
+         -- à compléter
+         --    boucle pour placer Prec < Val <= Current
+         while Prec.Value.Word < Val and then Val <= Current.Value.Word loop
+            Current := Current.Next;
+         end loop;
+         -- fin de liste ou Val absente de la liste
+         if Current = null or else Val < Current.Value.Word then
+            raise WORD_INEXISTANT;
+         else
+            if Val < List.Value.Word then
+               if Val = Current.Value.Word then
+                  Tmp := Current;
+                  Tmp.Next := Tmp.Next.Next;
+                  Free(Current);
+               end if;
+            end if;
+         end if;
+      end if;
+   end Delete;
+end gestion_liste;

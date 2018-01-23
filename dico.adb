@@ -84,6 +84,7 @@ begin
                Put( Difference(L2, L1) );
             end if;
             if Argument(1) = "-c" then
+               Put("ok");
                FileToList(Argument(3), L2);
                Put( L1 + L2 );
             end if;
