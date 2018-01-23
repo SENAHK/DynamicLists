@@ -30,18 +30,20 @@ procedure joseph is
    -- Insert in List in a way for that List is a circular list-type
    procedure Insert(List: in out T_Liste; N: in Integer) is 
       Tmp: T_Liste := new T_Element;
-      Temp: T_Liste;
+      First: T_Liste;
    begin
       List := new T_Element;
       for i in 1..N loop
          Tmp := new T_Element'(i, null);
+         -- Next -> on Tmp
          List.Next := Tmp;
+		 
          List := Tmp;
          if i = 1 then
-            Temp := List;
+            First := List;
          end if;
       end loop;
-      List.Next := Temp;
+      List.Next := First;
    end Insert;
 
    -- Delete
@@ -52,27 +54,34 @@ procedure joseph is
    begin
       while List /= null loop
          i := i + 1;
+		 
          -- for each k element, delete it
          if i rem K = 0 then
+            -- keep memory of next element
             List := List.Next;
             Put(List.Value);
             New_Line;
+			
+            -- Actual value
             Tmp := List;
             List := Alias.Next;
             List.Next := Tmp.Next;
+			
             Free(Tmp);
          else
             Alias := List;
             List:= List.Next;
          end if;
-	      
+         -- condition de sortie, one element left
          if List = Alias then
             Put(List.Value);
             List := null;
             exit;
          end if;
+		 
       end loop;
    end Delete;
+   
    List : T_Liste;
    -- N will fix the numbers that will be we in the list -> from 1 to N
    N : Positive := Integer'Value(Argument(1));
